@@ -3,8 +3,11 @@
  * @description 说晚安
  */
 import API from '../../api/loveMsg'
+import { getConfig } from '../../utils/getConfig'
 import { wxNotify } from '../WxNotify'
 import { newsTemplate } from './templates/news'
+
+const CONFIG = getConfig().loveMsg
 
 // 获取新闻
 const getNews = async() => {
@@ -85,7 +88,7 @@ const getStory = async() => {
   const template = {
     msgtype: 'text',
     text: {
-      content: `给鱼崽的今日份睡前故事来喽：
+      content: `给${CONFIG.girl_name}的今日份睡前故事来喽：
 🌑🌒🌓🌔🌕🌝😛\n
 『${res.title}』
 ${res.content}`,
