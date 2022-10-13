@@ -17,7 +17,7 @@ const goodWord = async () => {
     const dataSource = await Promise.allSettled([
       API.getSaylove(), // 土味情话
       API.getCaihongpi(), // 彩虹屁
-      API.getOneWord(), // 一言
+      // API.getOneWord(), // 一言
       API.getSongLyrics(), // 最美宋词
       API.getOneMagazines(), // one杂志
       API.getNetEaseCloud(), // 网易云热评
@@ -25,20 +25,20 @@ const goodWord = async () => {
     ])
 
     // 过滤掉异常数据
-    const [sayLove, caiHongpi, oneWord, songLyrics, oneMagazines, netEaseCloud, dayEnglish] =
+    const [sayLove, caiHongpi, /* oneWord, */ songLyrics, oneMagazines, netEaseCloud, dayEnglish] =
       dataSource.map((n) => (n.status === 'fulfilled' ? n.value : null))
 
     // 对象写法
     const data: any = {
       sayLove,
       caiHongpi,
-      oneWord,
+      // oneWord,
       songLyrics,
       oneMagazines,
       netEaseCloud,
       dayEnglish,
     }
-
+    console.log(data)
     const template = textTemplate(data)
     console.log('goodWord', template)
 
@@ -67,6 +67,6 @@ const weatherInfo = async () => {
 
 // goodMorning
 export const goodMorning = async () => {
-  await weatherInfo()
   await goodWord()
+  await weatherInfo()
 }
